@@ -1,4 +1,4 @@
-package dependents
+package github
 
 import (
 	"errors"
@@ -15,12 +15,14 @@ import (
 var regRepos = regexp.MustCompile(`([\d,]+)\s+Repositories`)
 var regPkgs = regexp.MustCompile(`([\d,]+)\s+Packages`)
 
-type Dependents struct {
-	Repositories int
-	Packages     int
+type Service struct {
 }
 
-func DependentsByOwnerAndRepo(owner, repo string) (*Dependents, error) {
+func NewService() *Service {
+	return &Service{}
+}
+
+func (s *Service) DependentsByOwnerAndRepo(owner, repo string) (*Dependents, error) {
 	api := fmt.Sprintf("%s/%s/%s/network/dependents", os.Getenv("GITHUB_URL"), owner, repo)
 	client := http.Client{
 		Timeout: 60 * time.Second,

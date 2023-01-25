@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"os"
 	"regexp"
 	"strconv"
 	"strings"
@@ -20,7 +21,7 @@ type Dependents struct {
 }
 
 func DependentsByOwnerAndRepo(owner, repo string) (*Dependents, error) {
-	api := fmt.Sprintf("https://github.com/%s/%s/network/dependents", owner, repo)
+	api := fmt.Sprintf("%s/%s/%s/network/dependents", os.Getenv("GITHUB_URL"), owner, repo)
 	client := http.Client{
 		Timeout: 60 * time.Second,
 	}

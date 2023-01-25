@@ -9,7 +9,7 @@ import (
 	"github.com/go-redis/redis/v8"
 	"github.com/joho/godotenv"
 	"github.com/razonyang/apis/internal/app"
-	"github.com/razonyang/apis/internal/shields.io/github"
+	"github.com/razonyang/apis/internal/github"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -26,7 +26,7 @@ func main() {
 	cacheStore := redis_store.NewRedis(redis.NewClient(app.RedisOptions()))
 	cacheManager := cache.New[string](cacheStore)
 
-	githubCtrl := github.New(cacheManager)
+	githubCtrl := github.New(github.NewService(), cacheManager)
 
 	r := gin.Default()
 	r.GET("/", func(c *gin.Context) {
@@ -35,6 +35,6 @@ func main() {
 		})
 	})
 	v1 := r.Group("/v1")
-	v1.GET("/shields.io/github/used-by/:owner/:repo", githubCtrl.UsedBy)
+	v1.GET("/github/dependents/:owner/:repo", githubCtrl.Dependents)
 	r.Run()
 }

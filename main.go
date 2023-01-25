@@ -8,8 +8,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
 	"github.com/joho/godotenv"
-	"github.com/razonyang/apis/internal/app"
-	"github.com/razonyang/apis/internal/github"
+	"github.com/razonyang/api/internal/app"
+	"github.com/razonyang/api/internal/github"
 	log "github.com/sirupsen/logrus"
 )
 

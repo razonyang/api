@@ -3,7 +3,7 @@ package github
 import (
 	"encoding/json"
 
-	"github.com/razonyang/apis/internal/helper"
+	"github.com/razonyang/api/internal/helper"
 )
 
 type Dependents struct {

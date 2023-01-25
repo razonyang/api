@@ -1,4 +1,4 @@
-module github.com/razonyang/apis
+module github.com/razonyang/api
 
 go 1.19
 

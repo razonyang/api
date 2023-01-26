@@ -27,7 +27,7 @@ func main() {
 	cacheStore := redis_store.NewRedis(redis.NewClient(app.RedisOptions()))
 	cacheManager := cache.New[string](cacheStore)
 
-	githubCtrl := github.New(github.NewService(), cacheManager)
+	githubCtrl := github.New(github.NewService(cacheManager))
 	moduleCtrl := hugo.NewModuleController(hugo.NewService(cacheManager))
 
 	r := gin.Default()

@@ -10,6 +10,7 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/razonyang/api/internal/app"
 	"github.com/razonyang/api/internal/github"
+	"github.com/razonyang/api/internal/hugo"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -27,6 +28,7 @@ func main() {
 	cacheManager := cache.New[string](cacheStore)
 
 	githubCtrl := github.New(github.NewService(), cacheManager)
+	moduleCtrl := hugo.NewModuleController(hugo.NewService(cacheManager))
 
 	r := gin.Default()
 	r.GET("/", func(c *gin.Context) {
@@ -36,5 +38,6 @@ func main() {
 	})
 	v1 := r.Group("/v1")
 	v1.GET("/github/dependents/:owner/:repo", githubCtrl.Dependents)
+	v1.GET("/hugo/modules/:vendor/:owner/:repo", moduleCtrl.Requirements)
 	r.Run()
 }

@@ -8,10 +8,10 @@ import (
 	"path"
 	"time"
 
-	"github.com/eko/gocache/lib/v4/cache"
 	"github.com/eko/gocache/lib/v4/store"
 	"github.com/google/go-github/v49/github"
 	"github.com/pelletier/go-toml/v2"
+	"github.com/razonyang/api/internal/app"
 	log "github.com/sirupsen/logrus"
 	"golang.org/x/oauth2"
 	"gopkg.in/yaml.v3"
@@ -20,10 +20,10 @@ import (
 var configFilenames = []string{"hugo.toml", "hugo.yaml", "hugo.json", "config.toml", "config.yaml", "config.json"}
 
 type Service struct {
-	cache cache.CacheInterface[string]
+	cache *app.CacheService
 }
 
-func NewService(cache cache.CacheInterface[string]) *Service {
+func NewService(cache *app.CacheService) *Service {
 	return &Service{
 		cache: cache,
 	}
@@ -46,11 +46,7 @@ func (service *Service) newClient(ctx context.Context) *github.Client {
 func (service *Service) Config(ctx context.Context, vendor, owner, repo string) (*Config, error) {
 	cfg := &Config{}
 	cacheKey := fmt.Sprintf("hugo-module-%s-%s-%s-config", vendor, owner, repo)
-	cacheVal, err := service.cache.Get(ctx, cacheKey)
-	if err == nil {
-		err = json.Unmarshal([]byte(cacheVal), cfg)
-		fmt.Println(cacheVal, err, cfg)
-	}
+	_, err := service.cache.Get(ctx, cacheKey, cfg)
 	if err != nil {
 		log.Debugf("failed to fetch hugo module config from cache: %s", err)
 
@@ -82,11 +78,7 @@ func (service *Service) Config(ctx context.Context, vendor, owner, repo string) 
 				log.Panic("failed to parse config: %s", err)
 			}
 
-			cacheData, err := json.Marshal(cfg)
-			if err != nil {
-				log.Infof("failed to marshal hugo module config: %s", err)
-			}
-			if err = service.cache.Set(ctx, cacheKey, string(cacheData), store.WithExpiration(time.Hour)); err != nil {
+			if err = service.cache.Set(ctx, cacheKey, cfg, store.WithExpiration(time.Hour)); err != nil {
 				log.Infof("failed to cache hugo module config: %s", err)
 			}
 

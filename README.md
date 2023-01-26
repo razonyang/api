@@ -27,10 +27,10 @@ Show how many projects are using your repository.
 
 **Integrate with Shields.io**
 
-[![GitHub Used By](https://img.shields.io/badge/dynamic/json?color=success&label=used%20by&query=repositories_humanize&logo=github&url=https://api.razonyang.com/v1/github/dependents/twbs/bootstrap)](https://github.com/twbs/bootstrap/network/dependents)
-[![Hugo Used By](https://img.shields.io/badge/dynamic/json?color=success&label=used%20by&query=repositories_humanize&logo=hugo&url=https://api.razonyang.com/v1/github/dependents/razonyang/hugo-theme-bootstrap)](https://github.com/razonyang/hugo-theme-bootstrap/network/dependents)
+[![GitHub Used By](https://img.shields.io/badge/dynamic/json?color=success&label=used+by&query=repositories_humanize&logo=github&url=https://api.razonyang.com/v1/github/dependents/twbs/bootstrap)](https://github.com/twbs/bootstrap/network/dependents)
+[![Hugo Used By](https://img.shields.io/badge/dynamic/json?color=success&label=used+by&query=repositories_humanize&logo=hugo&url=https://api.razonyang.com/v1/github/dependents/razonyang/hugo-theme-bootstrap)](https://github.com/razonyang/hugo-theme-bootstrap/network/dependents)
 
-`https://img.shields.io/badge/dynamic/json?color=success&label=used-by&query=repositories_humanize&logo=github&url={endpoint}/{version}/github/dependents/{owner}/{repo}`
+`https://img.shields.io/badge/dynamic/json?color=success&label=used+by&query=repositories_humanize&logo=github&url={endpoint}/{version}/github/dependents/{owner}/{repo}`
 
 ### Hugo
 

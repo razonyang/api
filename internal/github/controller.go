@@ -35,7 +35,7 @@ func (controller *Controller) Dependents(c *gin.Context) {
 	if err != nil {
 		log.Debugf("failed to fetch dependents from cache: %s", err)
 
-		dependents, err := controller.service.DependentsByOwnerAndRepo(c.Param("owner"), c.Param("repo"))
+		dependents, err = controller.service.DependentsByOwnerAndRepo(c.Param("owner"), c.Param("repo"))
 		if err != nil {
 			log.Panicf("failed to fetch dependents: %s", err)
 		}

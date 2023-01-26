@@ -6,7 +6,7 @@ import (
 	"github.com/go-redis/redis/v8"
 )
 
-func RedisOptions() *redis.Options {
+func redisOptions() *redis.Options {
 	opt := &redis.Options{
 		Addr: os.Getenv("REDIS_ADDR"),
 	}

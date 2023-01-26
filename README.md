@@ -42,7 +42,7 @@ Returns Hugo module/theme info, i.e. ![Hugo Requirements](https://img.shields.io
 
 ```json
 {
-   "hugo_version":{
+   "hugoVersion":{
       "extended":true,
       "min":"0.99.0",
       "max":"0.111.1"

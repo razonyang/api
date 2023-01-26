@@ -11,7 +11,7 @@ type Config struct {
 }
 
 type Module struct {
-	HugoVersion HugoVersion `json:"hugo_version" yaml:"hugoVersion"`
+	HugoVersion HugoVersion `json:"hugoVersion" yaml:"hugoVersion"`
 }
 
 type HugoVersion struct {
@@ -40,7 +40,7 @@ func (m Module) requirements() string {
 
 func (m Module) MarshalJSON() ([]byte, error) {
 	return json.Marshal(map[string]interface{}{
-		"hugo_version": m.HugoVersion,
+		"hugoVersion":  m.HugoVersion,
 		"requirements": m.requirements(),
 	})
 }

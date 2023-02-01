@@ -4,7 +4,9 @@
 |---|:---:|
 | https://api.razonyang.com | `v1`
 
-The instance is launched on my small k3s (k8s) cluster, you can also [host it yourself](#self-hosted).
+The instance is launched on my small k8s (k3s) cluster, you can also [host it yourself](#self-hosted).
+
+> Since 02/02/2023, the APIs were hosted on [Digital Ocean](https://www.digitalocean.com/?utm_medium=opensource&utm_source=hugo-theme-bootstrap) instead of China cloud servers, for getting lower latency between APIs and related services, such as GitHub APIs.
 
 ## APIs
 

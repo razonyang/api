@@ -30,6 +30,7 @@ func main() {
 
 	r := gin.Default()
 	r.Use(middleware.ErrorHandler)
+	r.NoRoute(app.NotFound)
 
 	r.GET("/", index.Index)
 

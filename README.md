@@ -67,6 +67,8 @@ Returns Hugo module/theme info, i.e. ![Hugo Requirements](https://img.shields.io
 | `REDIS_ADDR` | N | `127.0.0.1:6379` | Redis address in form `host:port`.
 | `REDIS_PASSWORD` | N | - | Redis password.
 | `GITHUB_TOKEN` | N | - | GitHub API access token.
+| `API_NAME` | N | `` | The API name.
+| `API_ENDPOINT` | Y | `https://api.razonyang.com` | The API endpoint.
 
 The `.env` file will be loaded if presents.
 

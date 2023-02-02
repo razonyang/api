@@ -8,6 +8,7 @@ import (
 	"github.com/razonyang/api/internal/app"
 	"github.com/razonyang/api/internal/github"
 	"github.com/razonyang/api/internal/hugo"
+	"github.com/razonyang/api/internal/index"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -27,11 +28,7 @@ func main() {
 	moduleCtrl := hugo.NewModuleController(hugo.NewService(cacheService))
 
 	r := gin.Default()
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"hello": "world",
-		})
-	})
+	r.GET("/", index.Index)
 	v1 := r.Group("/v1")
 	v1.GET("/github/dependents/:owner/:repo", githubCtrl.Dependents)
 	v1.GET("/hugo/modules/:vendor/:owner/:repo", moduleCtrl.Requirements)

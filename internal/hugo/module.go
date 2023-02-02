@@ -1,8 +1,9 @@
 package hugo
 
 import (
+	"fmt"
+
 	"github.com/gin-gonic/gin"
-	log "github.com/sirupsen/logrus"
 )
 
 type ModuleController struct {
@@ -18,12 +19,14 @@ func NewModuleController(service *Service) *ModuleController {
 func (ctrl *ModuleController) Requirements(c *gin.Context) {
 	vendor := c.Param("vendor")
 	if vendor != "github.com" {
-		log.Panic("unsupported vendor: %s", vendor)
+		c.Error(fmt.Errorf("unsupported vendor: %s", vendor))
+		return
 	}
 
 	cfg, err := ctrl.service.Config(c.Request.Context(), vendor, c.Param("owner"), c.Param("repo"))
 	if err != nil {
-		log.Panic("failed to fetch config: %s", err)
+		c.Error(err)
+		return
 	}
 
 	c.JSON(200, cfg.Module)

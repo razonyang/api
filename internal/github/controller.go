@@ -4,7 +4,6 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	log "github.com/sirupsen/logrus"
 )
 
 type Controller struct {
@@ -21,7 +20,8 @@ func (controller *Controller) Dependents(c *gin.Context) {
 	ctx := c.Request.Context()
 	d, err := controller.service.Dependents(ctx, c.Param("owner"), c.Param("repo"))
 	if err != nil {
-		log.Panicf("failed to fetch dependents: %s", err)
+		c.Error(err)
+		return
 	}
 	c.JSON(http.StatusOK, d)
 }

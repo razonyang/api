@@ -36,6 +36,7 @@ func main() {
 
 	v1 := r.Group("/v1")
 	v1.GET("/github/dependents/:owner/:repo", githubCtrl.Dependents)
+	v1.GET("/github/tag/:owner/:repo", githubCtrl.Tag)
 	v1.GET("/hugo/modules/:vendor/:owner/:repo", moduleCtrl.Requirements)
 
 	r.Run()

@@ -11,6 +11,7 @@ require (
 	github.com/joho/godotenv v1.4.0
 	github.com/pelletier/go-toml/v2 v2.0.6
 	github.com/sirupsen/logrus v1.9.0
+	golang.org/x/mod v0.7.0
 	golang.org/x/oauth2 v0.4.0
 	gopkg.in/yaml.v3 v3.0.1
 )

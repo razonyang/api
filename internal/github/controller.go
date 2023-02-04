@@ -16,9 +16,19 @@ func New(service *Service) *Controller {
 	}
 }
 
-func (controller *Controller) Dependents(c *gin.Context) {
+func (ctrl *Controller) Dependents(c *gin.Context) {
 	ctx := c.Request.Context()
-	d, err := controller.service.Dependents(ctx, c.Param("owner"), c.Param("repo"))
+	d, err := ctrl.service.Dependents(ctx, c.Param("owner"), c.Param("repo"))
+	if err != nil {
+		c.Error(err)
+		return
+	}
+	c.JSON(http.StatusOK, d)
+}
+
+func (ctrl *Controller) Tag(c *gin.Context) {
+	ctx := c.Request.Context()
+	d, err := ctrl.service.Tag(ctx, c.Param("owner"), c.Param("repo"), c.Query("prefix"))
 	if err != nil {
 		c.Error(err)
 		return

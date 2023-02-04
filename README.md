@@ -34,6 +34,23 @@ Show how many projects are using your repository.
 
 `https://img.shields.io/badge/dynamic/json?color=success&label=used+by&query=repositories_humanize&logo=github&url={endpoint}/{version}/github/dependents/{owner}/{repo}`
 
+### GitHub Tag
+
+![Latest tag](https://img.shields.io/badge/dynamic/json?color=blue&label=tag&query=name&url=https://api.razonyang.com/v1/github/tag/github.com/razonyang/hb)
+![Latest tag](https://img.shields.io/badge/dynamic/json?color=blue&label=tag&query=name&url=https://api.razonyang.com/v1/github/tag/github.com/razonyang/hb%3Fprefix=modules%2Fdocs%2F)
+
+Get the latest tag of repository.
+
+`{endpoint}/{version}/github/tag/{owner}/{repo}?prefix={prefix}`
+
+- `prefix`: optional.
+
+```json
+{
+   "name": "v0.1.0"
+}
+```
+
 ### Hugo
 
 #### Hugo Module Info

@@ -36,8 +36,8 @@ Show how many projects are using your repository.
 
 ### GitHub Tag
 
-![Latest tag](https://img.shields.io/badge/dynamic/json?color=blue&label=tag&query=name&url=https://api.razonyang.com/v1/github/tag/github.com/razonyang/hb)
-![Latest tag](https://img.shields.io/badge/dynamic/json?color=blue&label=tag&query=name&url=https://api.razonyang.com/v1/github/tag/github.com/razonyang/hb%3Fprefix=modules%2Fdocs%2F)
+![Latest tag](https://img.shields.io/badge/dynamic/json?color=blue&label=tag&query=name&url=https://api.razonyang.com/v1/github/tag/razonyang/hb)
+![Latest tag](https://img.shields.io/badge/dynamic/json?color=blue&label=tag&query=name&url=https://api.razonyang.com/v1/github/tag/razonyang/hb%3Fprefix=modules%2Fdocs%2F)
 
 Get the latest tag of repository.
 

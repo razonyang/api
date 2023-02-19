@@ -78,35 +78,27 @@ func (s *Service) Dependents(ctx context.Context, owner, repo string) (*Dependen
 }
 
 func (s *Service) Tag(ctx context.Context, owner, repo, prefix string) (*Tag, error) {
-	t := &Tag{}
-	cacheKey := fmt.Sprintf("github-tag-%s-%s-%s", owner, repo, prefix)
-	_, err := s.cache.Get(ctx, cacheKey, t)
+	tags, err := s.allTags(ctx, owner, repo)
 	if err != nil {
-		log.Debugf("failed to fetch tag from cache: %s", err)
-		tags, err := s.allTags(ctx, owner, repo)
-		if err != nil {
-			return nil, err
-		}
-		if len(tags) == 0 {
-			return nil, fmt.Errorf("no tags found")
-		}
+		return nil, err
+	}
+	if len(tags) == 0 {
+		return nil, fmt.Errorf("no tags found")
+	}
 
-		if prefix != "" {
-			for i := len(tags) - 1; i >= 0; i-- {
-				if strings.HasPrefix(tags[i], prefix) {
-					t.Name = tags[i][len(prefix):]
-					break
-				}
+	if prefix != "" {
+		for i := len(tags) - 1; i >= 0; i-- {
+			if strings.HasPrefix(tags[i], prefix) {
+				return &Tag{
+					Name: tags[i][len(prefix):],
+				}, nil
 			}
-		} else {
-			t.Name = tags[len(tags)-1]
-		}
-		if err = s.cache.Set(ctx, cacheKey, t, store.WithExpiration(15*time.Minute)); err != nil {
-			log.Errorf("failed to cache tag: %s", err)
 		}
 	}
 
-	return t, nil
+	return &Tag{
+		Name: tags[len(tags)-1],
+	}, nil
 }
 
 func (s *Service) allTags(ctx context.Context, owner, repo string) (tags []string, err error) {
@@ -136,7 +128,7 @@ func (s *Service) allTags(ctx context.Context, owner, repo string) (tags []strin
 		}
 
 		semver.Sort(tags)
-		if err = s.cache.Set(ctx, cacheKey, tags, store.WithExpiration(15*time.Minute)); err != nil {
+		if err = s.cache.Set(ctx, cacheKey, tags, store.WithExpiration(5*time.Minute)); err != nil {
 			log.Errorf("failed to cache tags: %s", err)
 		}
 		fmt.Println(tags)

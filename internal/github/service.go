@@ -69,7 +69,7 @@ func (s *Service) Dependents(ctx context.Context, owner, repo string) (*Dependen
 			d.Packages, _ = strconv.Atoi(strings.ReplaceAll(string(pkgMatches[0][1]), ",", ""))
 		}
 
-		if err = s.cache.Set(ctx, cacheKey, d, store.WithExpiration(6*time.Hour)); err != nil {
+		if err = s.cache.Set(ctx, cacheKey, d, store.WithExpiration(time.Hour)); err != nil {
 			log.Infof("failed to cache: %s", err)
 		}
 	}

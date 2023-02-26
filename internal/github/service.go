@@ -131,7 +131,6 @@ func (s *Service) allTags(ctx context.Context, owner, repo string) (tags []strin
 		if err = s.cache.Set(ctx, cacheKey, tags, store.WithExpiration(5*time.Minute)); err != nil {
 			log.Errorf("failed to cache tags: %s", err)
 		}
-		fmt.Println(tags)
 	}
 
 	return
